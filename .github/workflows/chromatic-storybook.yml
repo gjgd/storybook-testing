@@ -1,4 +1,6 @@
-name: Build storybook
+# .github/workflows/chromatic.yml
+
+name: Chromatic
 
 on:
   push:
@@ -6,21 +8,16 @@ on:
       - '**'
 
 jobs:
-  ci:
+  build-storybook:
     runs-on: ubuntu-latest
     steps:
-      - name: Begin CI...
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v1
 
-      - name: Use Node 14
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - name: Install
+      - name: Install dependencies
         run: npm install
 
-      - name: Test
-        run: npm run chromatic
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
