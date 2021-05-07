@@ -10,9 +10,7 @@ export default {
 const Template = (args) => <Page {...args} />;
 
 export const LoggedIn = Template.bind({});
-LoggedIn.args = {
-  user: {},
-};
+LoggedIn.args = {};
 
 export const LoggedOut = Template.bind({});
 LoggedOut.args = {
